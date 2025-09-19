@@ -1,3 +1,1 @@
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("Website loaded successfully!")
-});
+// Soon  I use Javascript
