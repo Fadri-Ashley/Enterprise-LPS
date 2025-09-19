@@ -17,6 +17,30 @@
     </header>
 
     <h1>This is my project</h1>
+
+    <h2>Days Left until Graduate</h2>
+
+    <p id="demo"></p>
+
+    <script>
+      var countDownDate = new Date("Sep 4, 2026").getTime();
+
+      var x = setInterval(function() {
+        var now = new Date().getTime();
+
+        var distance = countDownDate - now;
+
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+        document.getElementById("demo").innerHTML = days + " days ";
+
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById("demo").innerHTML = "EXPIRED";
+        }
+      }, 1000)
+    </script>
+
     <h2>Big Project</h2>
     <p>This is my current project.</p>
     <ul>
