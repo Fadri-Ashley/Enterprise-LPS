@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+      <a href="index.html" class="circle"></a>
+      <a href="index.html" class="logo">Enterprise</a>
+
+      <nav>
+        <a href="my-project.html">My Project</a>
+        <a href="about.html">About</a>
+      </nav>
+    </header>
+
+    <h1>About this website</h1>
+
+    <h2>Days passed when website was created</h2>
+    <p>I established this website at 9 August 2025</p>
+    <p id="demo"></p>
+
+    <script>
+        var birthDay = new Date("Aug 9, 2025").getTime();
+        
+        var x = setInterval(function(){
+            var countDownDate = new Date().getTime();
+
+            var distance = countDownDate - birthDay;
+
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+            document.getElementById("demo").innerHTML = days + " Days";
+
+
+        }, 1000)
+
+    </script>
+</body>
+</html>
