@@ -21,8 +21,27 @@
 
 
     <div id="sidebar" class="sidebar">
-      <button class="addButton">+ Create</button>
+      <button class="addButton" id="openForm">+ Create</button>
     </div>
+
+    <!-- Pop Up Form Add -->
+     <div class="overlay" id="overlay">
+      <div class="modal">
+        <button class="close-btn" id="closeForm">X</button>
+        <h2>Add Article</h2>
+        <form id="myForm">
+          <label for="title">Title:</label><br>
+          <input type="text" id="title" name="title" required><br><br>
+
+          <label for="content">Content:</label><br>
+          <input type="text" id="content" name="content" required><br><br>
+
+          <button type="submit" class="submit-btn">Add</button>
+        </form>
+      </div>
+     </div>
+
+    <!-- Content -->
 
     <div class="container">
       <div class="article" draggable="true" data-id="1">

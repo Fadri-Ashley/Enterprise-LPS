@@ -6,6 +6,29 @@ toggleBtn.addEventListener("click", () => {
   sidebar.classList.toggle("active");
 });
 
+// Pop up form
+const openForm = document.getElementById("openForm");
+const closeForm = document.getElementById("closeForm");
+const overlay = document.getElementById("overlay");
+const form = document.getElementById("myForm");
+
+openForm.addEventListener("click", () => {
+  overlay.style.display = "flex";
+});
+
+closeForm.addEventListener("click", () => {
+  overlay.style.display = "none";
+});
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const title = document.getElementById("title").value;
+  const content = document.getElementById("content").value;
+  alert(`Article Successfully Added!\nTitle: ${title}\nContent: ${content}`);
+  overlay.style.display = "none";
+  form.reset();
+});
+
 // Drag and Drop
 
 const list = document.querySelector(".container");
