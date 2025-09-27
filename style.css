@@ -1,35 +1,38 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
 }
 
 header {
-    display: flex;
-    align-items: center;
-    background-color: white;
-    color: white;
-    padding: 5px;
-    text-align: left;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 .circle {
-    width: 30px;
-    height: 30px;
-    background-color: #333;
-    border-radius: 50%;
-    margin-right: 10px;
-    margin-left: 20px;
+  width: 30px;
+  height: 30px;
+  background-color: #333;
+  border-radius: 50%;
+  margin-right: 10px;
+  margin-left: 20px;
 }
 
 .logo {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    font-size: 2em;
-    text-decoration: none;
-    color: #333;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 2em;
+  text-decoration: none;
+  color: #333;
 }
 
 nav a {
@@ -40,65 +43,95 @@ nav a {
 }
 
 main {
-    padding: 2em;
+  padding: 2em;
 }
 
 .card-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }
 
 .card {
-    width: 200px;
-    height: 250px;
-    background: #fff;
-    border-radius: 20px;
-    padding: 20px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    color: black;
-    transition: 0.3s;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 200px;
+  height: 250px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  transition: 0.3s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .container {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  margin-top: 70px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .project {
-    padding: 15px 20px;
-    border-radius: 10px;
-    background: #fff;
-    color: black;
-    text-decoration: none;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  padding: 15px 20px;
+  border-radius: 10px;
+  background: #fff;
+  color: black;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .article {
-    padding: 10px;
-    border-radius: 10px;
-    background-color: #fff;
-    color: black;
-    border-style: solid;
-    border-width: 1px;
-    border-color: black;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #fff;
+  color: black;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+}
+
+.addButton {
+  width: 150px;
+  height: 50px;
+  padding: 10px;
+  font-size: 20px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  margin-left: 40px;
+}
+
+.sidebar {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: -250px;
+  background-color: #fff;
+  padding-top: 100px;
+  transition: 0.3s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.sidebar.active {
+  left: 0;
 }
 
 footer {
-    background-color: #f4f4f4;
-    text-align: center;
-    padding: 1em 0;
-    margin-top: 2em;
+  background-color: #f4f4f4;
+  text-align: center;
+  padding: 1em 0;
+  margin-top: 2em;
 }

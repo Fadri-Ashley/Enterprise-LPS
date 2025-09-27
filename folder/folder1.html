@@ -8,16 +8,21 @@
   </head>
   <body>
     <header>
-      <a href="/index.html" class="circle"></a>
+    <button id="toggleBtn" class="circle"></button>
+      
       <a href="/index.html" class="logo">Enterprise</a>
 
       <nav>
         <a href="/my-project.html">My Project</a>
         <a href="/about.html">About</a>
       </nav>
+
     </header>
 
-    <h2>Big Project</h2>
+
+    <div id="sidebar" class="sidebar">
+      <button class="addButton">+ Create</button>
+    </div>
 
     <div class="container">
       <div class="article" draggable="true" data-id="1">
@@ -30,7 +35,7 @@
         </p>
       </div>
 
-      <div class="article" draggable="true" data-id="2"> 
+      <div class="article" draggable="true" data-id="2">
         <h3>Deep Learing with CUDA</h3>
         <p>(Thesis Project)</p>
         <p>I choose Deep Learning with CUDA for my college thesis project.</p>
