@@ -6,101 +6,58 @@ toggleBtn.addEventListener("click", () => {
   sidebar.classList.toggle("active");
 });
 
-// Pop up form
-const openForm = document.getElementById("openForm");
-const closeForm = document.getElementById("closeForm");
-const overlay = document.getElementById("overlay");
-const form = document.getElementById("myForm");
+// Add Article
+const createBtn = document.getElementById("addButton");
+const cardContainer = document.getElementById("card1Container");
 
-openForm.addEventListener("click", () => {
-  overlay.style.display = "flex";
+// Load dari localStorage waktu halaman dibuka
+window.addEventListener("load", () => {
+  const savedCards = JSON.parse(localStorage.getItem("cards")) || [];
+  savedCards.forEach((card) => {
+    addCard(card.title, card.article);
+  });
 });
 
-closeForm.addEventListener("click", () => {
-  overlay.style.display = "none";
+// Function buat tambah card baru
+function addCard(title = "", article = "") {
+  const newCard = document.createElement("div");
+  newCard.classList.add("card1");
+
+  newCard.innerHTML = `
+        <button class="delete-btn">Delete</button>
+        <input type="text" placeholder="Add Title" value="${title}">
+        <textarea placeholder="Add Article">${article}</textarea>
+      `;
+
+  // Event listener autosave
+  const inputTitle = newCard.querySelector("input");
+  const inputArticle = newCard.querySelector("textarea");
+  const deleteBtn = newCard.querySelector(".delete-btn");
+
+  inputTitle.addEventListener("input", saveCards);
+  inputArticle.addEventListener("input", saveCards);
+
+  deleteBtn.addEventListener("click", () => {
+    newCard.remove();
+    saveCards();
+  });
+
+  cardContainer.appendChild(newCard);
+}
+
+// Tombol create
+createBtn.addEventListener("click", () => {
+  addCard();
+  saveCards(); // langsung simpan biar nggak hilang
 });
 
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const title = document.getElementById("title").value;
-  const content = document.getElementById("content").value;
-  alert(`Article Successfully Added!\nTitle: ${title}\nContent: ${content}`);
-  overlay.style.display = "none";
-  form.reset();
-});
-
-// Drag and Drop
-
-const list = document.querySelector(".container");
-let draggingItem = null;
-
-const storageKey = window.location.pathname + "_articleOrder";
-
-if (list) {
-  list.addEventListener("dragstart", (e) => {
-    draggingItem = e.target;
-    e.target.classList.add("dragging");
+// Simpan semua kartu ke localStorage
+function saveCards() {
+  const cards = [];
+  document.querySelectorAll(".card1").forEach((card) => {
+    const title = card.querySelector("input").value;
+    const article = card.querySelector("textarea").value;
+    cards.push({ title, article });
   });
-  list.addEventListener("dragend", (e) => {
-    e.target.classList.remove("dragging");
-    document
-      .querySelectorAll(".article")
-      .forEach((item) => item.classList.remove("over"));
-    draggingItem = null;
-    saveOrder();
-  });
-  list.addEventListener("dragover", (e) => {
-    e.preventDefault();
-    const draggingOverItem = getDragAfterElement(list, e.clientY);
-    document
-      .querySelectorAll(".article")
-      .forEach((item) => item.classList.remove("over"));
-    if (draggingOverItem) {
-      draggingOverItem.classList.add("over");
-      list.insertBefore(draggingItem, draggingOverItem);
-    } else {
-      list.appendChild(draggingItem);
-    }
-  });
-
-  loadOrder();
+  localStorage.setItem("cards", JSON.stringify(cards));
 }
-
-function getDragAfterElement(container, y) {
-  const draggableElements = [
-    ...container.querySelectorAll(".article:not(.dragging)"),
-  ];
-  return draggableElements.reduce(
-    (closest, child) => {
-      const box = child.getBoundingClientRect();
-      const offset = y - box.top - box.height / 2;
-      if (offset < 0 && offset > closest.offset) {
-        return { offset: offset, element: child };
-      } else {
-        return closest;
-      }
-    },
-    { offset: Number.NEGATIVE_INFINITY }
-  ).element;
-}
-
-// Save Order to local storage
-
-function saveOrder() {
-  const order = [...list.querySelectorAll(".article")].map(
-    (el) => el.dataset.id
-  );
-  localStorage.setItem(storageKey, JSON.stringify(order));
-}
-
-function loadOrder() {
-  const order = JSON.parse(localStorage.getItem(storageKey));
-  if (!order) return;
-
-  order.forEach((id) => {
-    const el = document.querySelector(`.article[data-id='${id}']`);
-    if (el) list.appendChild(el);
-  });
-}
-
-loadOrder();
