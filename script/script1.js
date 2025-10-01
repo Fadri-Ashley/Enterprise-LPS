@@ -1,9 +1,11 @@
 // Sidebar
 const sidebar = document.getElementById("sidebar");
 const toggleBtn = document.getElementById("toggleBtn");
+const content = document.getElementById("card1Container")
 
 toggleBtn.addEventListener("click", () => {
   sidebar.classList.toggle("active");
+  content.classList.toggle("shift");
 });
 
 // Add Article
@@ -25,8 +27,8 @@ function addCard(title = "", article = "") {
 
   newCard.innerHTML = `
         <button class="delete-btn">Delete</button>
-        <input type="text" placeholder="Add Title" value="${title}">
-        <textarea placeholder="Add Article">${article}</textarea>
+        <input type="text" placeholder="Add Title" maxlength="50" value="${title}">
+        <textarea placeholder="Add Article" spellcheck="false">${article}</textarea>
       `;
 
   // Event listener autosave
