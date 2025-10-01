@@ -1,7 +1,7 @@
 // Sidebar
 const sidebar = document.getElementById("sidebar");
 const toggleBtn = document.getElementById("toggleBtn");
-const content = document.getElementById("card1Container")
+const content = document.getElementById("cardGroup");
 
 toggleBtn.addEventListener("click", () => {
   sidebar.classList.toggle("active");
@@ -10,9 +10,9 @@ toggleBtn.addEventListener("click", () => {
 
 // Add Article
 const createBtn = document.getElementById("addButton");
-const cardContainer = document.getElementById("card1Container");
+const cardContainer = document.getElementById("cardGroup");
 
-// Load dari localStorage waktu halaman dibuka
+// Load from localstorage while open page
 window.addEventListener("load", () => {
   const savedCards = JSON.parse(localStorage.getItem("cards")) || [];
   savedCards.forEach((card) => {
@@ -20,13 +20,16 @@ window.addEventListener("load", () => {
   });
 });
 
-// Function buat tambah card baru
+// Function add card
 function addCard(title = "", article = "") {
   const newCard = document.createElement("div");
   newCard.classList.add("card1");
 
   newCard.innerHTML = `
-        <button class="delete-btn">Delete</button>
+        <button class="kebab-btn">⋮</button>
+        <div class="dropdown">
+          <button class="delete-btn">Delete</button>
+        </div>
         <input type="text" placeholder="Add Title" maxlength="50" value="${title}">
         <textarea placeholder="Add Article" spellcheck="false">${article}</textarea>
       `;
@@ -44,16 +47,30 @@ function addCard(title = "", article = "") {
     saveCards();
   });
 
+  // Event listener kebab menu
+  const kebabBtn = newCard.querySelector(".kebab-btn");
+  const dropdown = newCard.querySelector(".dropdown");
+
+  kebabBtn.addEventListener("click", (e) => {
+    dropdown.classList.toggle("show");
+
+    document.querySelectorAll(".dropdown").forEach((menu) => {
+      if (menu !== dropdown) menu.classList.remove("show");
+    });
+
+    e.stopPropagation();
+  });
+
   cardContainer.appendChild(newCard);
 }
 
-// Tombol create
+// Create button
 createBtn.addEventListener("click", () => {
   addCard();
-  saveCards(); // langsung simpan biar nggak hilang
+  saveCards(); // Save immediately
 });
 
-// Simpan semua kartu ke localStorage
+// Save all cards into localstorage
 function saveCards() {
   const cards = [];
   document.querySelectorAll(".card1").forEach((card) => {
@@ -63,3 +80,11 @@ function saveCards() {
   });
   localStorage.setItem("cards", JSON.stringify(cards));
 }
+
+// Kebab menu button
+
+window.addEventListener("click", () => {
+  document
+    .querySelectorAll(".dropdown")
+    .forEach((menu) => menu.classList.remove("show"));
+});
